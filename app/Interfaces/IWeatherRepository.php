@@ -6,5 +6,5 @@ namespace App\Interfaces;
 
 interface IWeatherRepository
 {
-    public function updateInformation($data);
+    function create($data);
 }

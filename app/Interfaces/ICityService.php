@@ -4,11 +4,11 @@ namespace App\Interfaces;
 
 interface ICityService
 {
-    public function get($id);
+    function get($id);
 
-    public function getByCityId($city_id);
+    function getByCityId($city_id);
 
-    public function add($name);
+    function add($name);
 
-    public function delete($id);
+    function delete($id);
 }

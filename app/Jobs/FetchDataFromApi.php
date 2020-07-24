@@ -2,6 +2,8 @@
 
 namespace App\Jobs;
 
+use App\DTO\WeatherCreateDTO;
+use App\Interfaces\IWeatherService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -11,6 +13,7 @@ use App\Interfaces\IOpenWeatherMapClient;
 use App\Interfaces\IWeatherRepository;
 use App\Interfaces\ICityRepository;
 use Illuminate\Support\Facades\Log;
+use Mockery\Exception;
 
 class FetchDataFromApi implements ShouldQueue
 {
@@ -30,24 +33,21 @@ class FetchDataFromApi implements ShouldQueue
      *
      * @return void
      */
-    public function handle(IOpenWeatherMapClient $client,
-                           IWeatherRepository $weatherRepository,
-                           ICityRepository $cityRepository
-    )
+    public function handle(IWeatherService $weatherService, ICityRepository $cityRepository)
     {
-        try {
-            $count = 0;
-			$cities = $cityRepository->getAll();
+        $cities = $cityRepository->getAll();
+        $count = 0;
 
-			foreach ($cities as $city) {
-                $data = $client->findCityById($city->api_city_id);
-                $weatherRepository->updateInformation($data);
+        foreach ($cities as $city) {
+            try {
+                $weatherService->addCurrentWeatherForCity($city);
                 $count++;
-			}
-			Log::alert('Pobrano nowe dane z API w ilośći '. $count);
-		}
-		catch(Exception $e) {
+            }
+            catch (Exception $e) {
+                Log::error($e->getMessage());
+            }
+        }
 
-		}
+        Log::alert('Pobrano nowe dane z API w ilośći '. $count);
     }
 }

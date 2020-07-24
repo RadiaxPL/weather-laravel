@@ -16,6 +16,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ $city->name }}</h5>
+                            <div>Temperatura {{ $city->lastActivity['temperature'] }} &#8451;</div>
+                            <div>Wilgotność: {{ $city->lastActivity['humidity'] }} %</div>
+                            <div>Ciśnienie: {{ $city->lastActivity['pressure'] }} hPa</div>
                             <hr>
                             <p>
                                 <a href="{{ route('show_by_id', ['id' => $city->id]) }}" class="btn btn-sm btn-info">Pokaż statystyki miasta</a>

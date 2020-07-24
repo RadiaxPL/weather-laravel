@@ -2,18 +2,19 @@
 
 namespace App\Services;
 
+use App\DTO\CityCreateDTO;
 use App\Interfaces\ICityRepository;
 use App\Interfaces\ICityService;
 use App\Interfaces\IOpenWeatherMapClient;
 
 class CityService implements ICityService {
-    private $client;
+    private $openWeatherMapClient;
     private $cityRepository;
 
-    public function __construct(IOpenWeatherMapClient $client, ICityRepository $city)
+    public function __construct(IOpenWeatherMapClient $openWeatherMapClient, ICityRepository $cityRepository)
     {
-        $this->client = $client;
-        $this->cityRepository = $city;
+        $this->openWeatherMapClient = $openWeatherMapClient;
+        $this->cityRepository = $cityRepository;
     }
 
     public function get($id)
@@ -32,12 +33,17 @@ class CityService implements ICityService {
 
     public function add($name)
     {
-        $response = $this->client->findCityByName($name);
+        $response = $this->openWeatherMapClient->findCityByName($name);
 
         if ($response == false) {
             return false;
         } else {
-            $response = $this->cityRepository->add($response);
+            $dto = new CityCreateDTO();
+            $dto->name = $response['name'];
+            $dto->api_city_id = $response['id'];
+
+            $response = $this->cityRepository->add($dto);
+
             return true;
         }
     }

@@ -6,13 +6,13 @@ namespace App\Interfaces;
 
 interface ICityRepository
 {
-    public function get($id);
+    function get($id);
 
-    public function getByCityId($city_id);
+    function getByCityId($city_id);
 
-    public function getAll();
+    function getAll();
 
-    public function add($data);
+    function add($data);
 
-    public function destroy($id);
+    function destroy($id);
 }
