@@ -2,30 +2,30 @@
 
 namespace App\Services;
 
+use App\Interfaces\ICityRepository;
 use App\Interfaces\IWeatherService;
 use App\Interfaces\IOpenWeatherMapClient;
-use App\Interfaces\IWeatherRepository;
 
 class WeatherService implements IWeatherService {
     private $client;
-    private $weatherRepository;
+    private $cityRepository;
 
-    public function __construct(IOpenWeatherMapClient $client, IWeatherRepository $weather)
+    public function __construct(IOpenWeatherMapClient $client, ICityRepository $city)
     {
         $this->client = $client;
-        $this->weatherRepository = $weather;
+        $this->cityRepository = $city;
     }
 
     public function get($id)
     {
-        $data = $this->weatherRepository->get($id);
+        $data = $this->cityRepository->get($id);
 
         return $data;
     }
 
     public function getByCityId($city_id)
     {
-        $data = $this->weatherRepository->getByCityId($city_id);
+        $data = $this->cityRepository->getByCityId($city_id);
 
         return $data;
     }
@@ -37,14 +37,14 @@ class WeatherService implements IWeatherService {
         if ($response == false) {
             return false;
         } else {
-            $response = $this->weatherRepository->add($response);
+            $response = $this->cityRepository->add($response);
             return true;
         }
     }
 
     public function delete($id)
     {
-        $this->weatherRepository->destroy($id);
+        $this->cityRepository->destroy($id);
 
         return true;
     }

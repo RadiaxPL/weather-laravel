@@ -19,6 +19,11 @@ class InterfaceServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            'App\Interfaces\ICityRepository',
+            'App\Repositories\CityRepository'
+        );
+
+        $this->app->bind(
             'App\Interfaces\IWeatherService',
             'App\Services\WeatherService'
         );
