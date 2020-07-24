@@ -4,13 +4,15 @@
 namespace App\Interfaces;
 
 
-interface IWeather
+interface IWeatherRepository
 {
     public function get($id);
 
+    public function getByCityId($city_id);
+
     public function getAll();
 
-    public function set($name);
+    public function add($name);
 
     public function destroy($id);
 }

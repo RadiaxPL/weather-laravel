@@ -14,8 +14,18 @@ class InterfaceServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            'App\Interfaces\IWeather',
+            'App\Interfaces\IWeatherRepository',
             'App\Repositories\WeatherRepository'
+        );
+
+        $this->app->bind(
+            'App\Interfaces\IWeatherService',
+            'App\Services\WeatherService'
+        );
+
+        $this->app->bind(
+            'App\Interfaces\IOpenWeatherMapClient',
+            'App\Client\OpenWeatherMapClient'
         );
     }
 

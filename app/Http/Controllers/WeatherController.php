@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Interfaces\IWeather;
+use App\Interfaces\IWeatherRepository;
+use App\Interfaces\IWeatherService;
 
 class WeatherController extends Controller
 {
+    private $weatherService;
     private $weatherRepository;
 
-    public function __construct(IWeather $weatherRepository)
+    public function __construct(IWeatherService $weatherService, IWeatherRepository $weatherRepository)
     {
+        $this->weatherService = $weatherService;
         $this->weatherRepository = $weatherRepository;
     }
 
@@ -34,7 +37,7 @@ class WeatherController extends Controller
             'city' => 'required|max:100',
         ]);
 
-        $response = $this->weatherRepository->set($city);
+        $response = $this->weatherService->add($city);
 
         if ($response == false) {
             return redirect()->route('add')->with('error', 'Brak podanego miasta w bazie!');

@@ -3,16 +3,19 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\IWeather;
+use App\Interfaces\IWeatherRepository;
 use App\Entities\City;
-use Illuminate\Support\Facades\Http;
 
-class WeatherRepository implements IWeather
+class WeatherRepository implements IWeatherRepository
 {
-
     public function get($id)
     {
         return City::findOrFail($id);
+    }
+
+    public function getByCityId($id)
+    {
+        return City::where('city_id', $id)->limit(1)->get();
     }
 
     public function getAll()
@@ -20,26 +23,14 @@ class WeatherRepository implements IWeather
         return City::all();
     }
 
-    public function set($name)
+    public function add($data)
     {
-        $response = Http::get(env('WEATHER_API_URL'), [
-            'q' => $name,
-            'units' => 'metric',
-            'appid' => env('WEATHER_API_KEY')
-        ]);
-
-        if ($response->successful()) {
-            $data = $response->json();
-            $cityNameWithCoutry = $data['name'].', '.$data['sys']['country'];
-
             $city = new City();
-            $city->name = $cityNameWithCoutry;
+            $city->name = $data['name'];
+            $city->city_id = $data['id'];
             $city->save();
 
-            return $cityNameWithCoutry;
-        } else {
-            return false;
-        }
+            return true;
     }
 
     public function destroy($id)
