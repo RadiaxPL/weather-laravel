@@ -1,13 +1,13 @@
 <?php
 
 
-namespace App\Services;
+namespace App\Implementations\Services;
 
 
 use App\DTO\WeatherCreateDTO;
-use App\Interfaces\IOpenWeatherMapClient;
-use App\Interfaces\IWeatherRepository;
-use App\Interfaces\IWeatherService;
+use App\Interfaces\Clients\IOpenWeatherMapClient;
+use App\Interfaces\Repositories\IWeatherRepository;
+use App\Interfaces\Services\IWeatherService;
 
 class WeatherService implements IWeatherService
 {

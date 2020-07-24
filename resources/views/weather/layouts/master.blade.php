@@ -27,7 +27,7 @@
                 <a class="nav-link" href="{{ route('add') }}">Dodaj nowe miasto</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('edit') }}">Edytuj miasta</a>
+                <a class="nav-link" href="{{ route('edit') }}">Zarządzaj miastami</a>
             </li>
         </ul>
         <div class="text-light text-center mr-2">

@@ -1,9 +1,9 @@
 <?php
 
 
-namespace App\Repositories;
+namespace App\Implementations\Repositories;
 
-use App\Interfaces\ICityRepository;
+use App\Interfaces\Repositories\ICityRepository;
 use App\Entities\City;
 
 class CityRepository implements ICityRepository {
@@ -29,6 +29,7 @@ class CityRepository implements ICityRepository {
         $city->name = $data->name;
         $city->api_city_id = $data->api_city_id;
         $city->save();
+
         return $city;
     }
 

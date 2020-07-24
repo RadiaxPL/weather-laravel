@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\ICityRepository;
+use App\Interfaces\Repositories\ICityRepository;
 use Illuminate\Http\Request;
-use App\Interfaces\ICityRepositoryRepository;
-use App\Interfaces\ICityService;
+use App\Interfaces\Repositories\ICityRepositoryRepository;
+use App\Interfaces\Services\ICityService;
 
 class WeatherController extends Controller
 {

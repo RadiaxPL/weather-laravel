@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Services;
+namespace App\Implementations\Services;
 
 use App\DTO\CityCreateDTO;
 use App\DTO\WeatherCreateDTO;
-use App\Interfaces\ICityRepository;
-use App\Interfaces\ICityService;
-use App\Interfaces\IOpenWeatherMapClient;
-use App\Interfaces\IWeatherRepository;
+use App\Interfaces\Repositories\ICityRepository;
+use App\Interfaces\Services\ICityService;
+use App\Interfaces\Clients\IOpenWeatherMapClient;
+use App\Interfaces\Repositories\IWeatherRepository;
 use Illuminate\Support\Facades\DB;
 use Mockery\Exception;
 
@@ -47,7 +47,7 @@ class CityService implements ICityService {
             try {
                 DB::beginTransaction();
 
-                $dto = new CityCreateDTO();
+                $dto = new CityCreateDTO;
                 $dto->name = $response['name'];
                 $dto->api_city_id = $response['id'];
 
@@ -65,6 +65,7 @@ class CityService implements ICityService {
             }
             catch (Exception $e) {
                 DB::rollback();
+
                 return false;
             }
 

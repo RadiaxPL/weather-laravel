@@ -30,20 +30,24 @@
                 @csrf
                 <div class="form-group">
                     <label class="font-weight-bold">E-mail</label>
-                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="exampleInputEmail1" placeholder="Wpisz swój e-mail">
+                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Wpisz swój e-mail">
                     @error('email')
                         <small class="text-danger">Podaj adres e-mail!</small>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label class="font-weight-bold">Hasło</label>
-                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="exampleInputPassword1" placeholder="Wpisz swoje hasło">
+                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Wpisz swoje hasło">
                     @error('password')
                         <small class="text-danger">Podaj hasło!</small>
                     @enderror
                 </div>
                 <button type="submit" class="btn btn-primary">Zaloguj</button>
-
+                @error('email')
+                <div class="alert alert-danger mt-4">
+                    Brak użytkownika w bazie!
+                </div>
+                @enderror
             </form>
         </div>
     </div>

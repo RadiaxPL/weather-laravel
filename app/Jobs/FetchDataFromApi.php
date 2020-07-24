@@ -2,16 +2,14 @@
 
 namespace App\Jobs;
 
-use App\DTO\WeatherCreateDTO;
-use App\Interfaces\IWeatherService;
+
+use App\Interfaces\Services\IWeatherService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Interfaces\IOpenWeatherMapClient;
-use App\Interfaces\IWeatherRepository;
-use App\Interfaces\ICityRepository;
+use App\Interfaces\Repositories\ICityRepository;
 use Illuminate\Support\Facades\Log;
 use Mockery\Exception;
 

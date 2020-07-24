@@ -1,8 +1,8 @@
 <?php
-namespace App\Clients;
+namespace App\Implementations\Clients;
 
 use Illuminate\Support\Facades\Http;
-use App\Interfaces\IOpenWeatherMapClient;
+use App\Interfaces\Clients\IOpenWeatherMapClient;
 
 class OpenWeatherMapClient implements IOpenWeatherMapClient{
 

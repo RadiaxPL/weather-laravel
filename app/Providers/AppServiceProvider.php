@@ -13,7 +13,30 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            'App\Interfaces\Repositories\IWeatherRepository',
+            'App\Implementations\Repositories\WeatherRepository'
+        );
+
+        $this->app->bind(
+            'App\Interfaces\Repositories\ICityRepository',
+            'App\Implementations\Repositories\CityRepository'
+        );
+
+        $this->app->bind(
+            'App\Interfaces\Services\ICityService',
+            'App\Implementations\Services\CityService'
+        );
+
+        $this->app->bind(
+            'App\Interfaces\Services\IWeatherService',
+            'App\Implementations\Services\WeatherService'
+        );
+
+        $this->app->bind(
+            'App\Interfaces\Clients\IOpenWeatherMapClient',
+            'App\Implementations\Clients\OpenWeatherMapClient'
+        );
     }
 
     /**
