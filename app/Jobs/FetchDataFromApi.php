@@ -32,17 +32,19 @@ class FetchDataFromApi implements ShouldQueue
      */
     public function handle(IOpenWeatherMapClient $client,
                            IWeatherRepository $weatherRepository,
-                           ICityRepository $cityRepository)
+                           ICityRepository $cityRepository
+    )
     {
-        Log::alert('alert 1');
         try {
+            $count = 0;
 			$cities = $cityRepository->getAll();
 
 			foreach ($cities as $city) {
                 $data = $client->findCityById($city->city_id);
                 $weatherRepository->updateInformation($data);
-                Log::alert('alert 2');
+                $count++;
 			}
+			Log::alert('Pobrano nowe dane z API w ilośći '. $count);
 		}
 		catch(Exception $e) {
 

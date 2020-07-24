@@ -18,7 +18,6 @@
                             <h5 class="card-title">{{ $city->name }}</h5>
                             <hr>
                             <p>
-                                <a href="#" class="btn btn-sm btn-warning">Edytuj miasto</a>
                                 <a href="{{ route('show_by_id', ['id' => $city->id]) }}" class="btn btn-sm btn-info">Pokaż statystyki miasta</a>
                             </p>
                         </div>

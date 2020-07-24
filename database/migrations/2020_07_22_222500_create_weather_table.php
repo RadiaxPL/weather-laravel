@@ -18,7 +18,7 @@ class CreateWeatherTable extends Migration
             $table->integer('temperature');
             $table->integer('pressure');
             $table->integer('humidity');
-            $table->integer('city_id');
+            $table->integer('api_city_id');
             $table->timestamps();
         });
     }

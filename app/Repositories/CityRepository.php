@@ -27,7 +27,7 @@ class CityRepository implements ICityRepository {
     {
         $city = new City();
         $city->name = $data['name'];
-        $city->city_id = $data['id'];
+        $city->api_city_id = $data['id'];
         $city->save();
     }
 

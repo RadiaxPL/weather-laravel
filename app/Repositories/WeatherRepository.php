@@ -14,7 +14,7 @@ class WeatherRepository implements IWeatherRepository
         $weather->temperature = $data['main']['temp'];
         $weather->pressure = $data['main']['pressure'];
         $weather->humidity = $data['main']['humidity'];
-        $weather->city_id = $data['id'];
+        $weather->api_city_id = $data['id'];
         $weather->save();
     }
 }
