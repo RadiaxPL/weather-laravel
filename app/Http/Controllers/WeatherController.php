@@ -14,6 +14,8 @@ class WeatherController extends Controller
 
     public function __construct(ICityService $cityService, ICityRepository $cityRepository)
     {
+        $this->middleware('auth');
+
         $this->cityService = $cityService;
         $this->cityRepository = $cityRepository;
     }
@@ -43,7 +45,7 @@ class WeatherController extends Controller
         if ($response == false) {
             return redirect()->route('add')->with('error', 'Brak podanego miasta w bazie!');
         } else {
-            return redirect()->route('add')->with('success', 'Dodano nowe miasto - ' . $response);
+            return redirect()->route('add')->with('success', 'Dodano nowe miasto - ' . $response['name']);
         }
     }
 

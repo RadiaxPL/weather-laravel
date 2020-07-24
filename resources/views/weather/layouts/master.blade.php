@@ -18,22 +18,27 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route('weather') }}">Home</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route('add') }}">Dodaj nowe miasto</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route('edit') }}">Edytuj miasta</a>
             </li>
         </ul>
+        <div class="text-light text-center mr-2">
+            Zalogowany jako: <span class="text-info"> {{ Auth::user()->name }} </span>
+            <form action="{{ route('logout') }}" method="post">
+                @csrf
+                <input type="submit" class="btn btn-primary btn-sm mt-2" value="Wyloguj" />
+            </form>
+        </div>
     </div>
-    <div class="text-light">
-        Witaj, nazwa!
-    </div>
+
 </nav>
 
 <div class="container-fluid main">

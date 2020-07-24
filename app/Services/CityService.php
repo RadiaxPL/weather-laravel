@@ -68,7 +68,7 @@ class CityService implements ICityService {
                 return false;
             }
 
-            return true;
+            return $city;
         }
     }
 
