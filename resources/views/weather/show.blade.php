@@ -3,20 +3,37 @@
 @section('content')
     <div class="container p-4 text-center">
         <img src="/statistic.png" height="128" width="128" alt="Statystyki pogody">
-        <h1 class="mt-4">Statystyki miast</h1>
+        <h1 class="mt-4">Statystyki miasta {{ $city->name }} </h1>
 
         <div class="row d-flex justify-content-center">
-            <div class="col-md-4 mt-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $city->name }}</h5>
-                        <hr>
-                        <p>
-                            <a href="#" class="btn btn-sm btn-warning">Edytuj miasto</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
+
+            <table class="table mt-4">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Temperatura</th>
+                    <th scope="col">Wilgotność</th>
+                    <th scope="col">Ciśnienie</th>
+                    <th scope="col">Data</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @forelse($city->statistic as $data)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $data->temperature }}</td>
+                            <td>{{ $data->humidity }}</td>
+                            <td>{{ $data->pressure }}</td>
+                            <td>{{ $data->created_at }}</td>
+                        </tr>
+                    @empty
+                        <div class="alert alert-danger">
+                            Brak danych historycznych!
+                        </div>
+                    @endforelse
+                </tbody>
+            </table>
+
         </div>
     </div>
 @endsection

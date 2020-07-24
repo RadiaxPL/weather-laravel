@@ -8,7 +8,7 @@ class City extends Model
 {
     public function statistic()
     {
-        return $this->hasMany('App\Entities\Weather');
+        return $this->hasMany('App\Entities\Weather')->latest()->take(10);
     }
 
     public function lastActivity()
