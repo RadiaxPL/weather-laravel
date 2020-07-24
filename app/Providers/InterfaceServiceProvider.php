@@ -24,8 +24,8 @@ class InterfaceServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            'App\Interfaces\IWeatherService',
-            'App\Services\WeatherService'
+            'App\Interfaces\ICityService',
+            'App\Services\CityService'
         );
 
         $this->app->bind(

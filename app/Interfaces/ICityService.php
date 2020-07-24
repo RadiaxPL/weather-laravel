@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface IWeatherService
+interface ICityService
 {
     public function get($id);
 

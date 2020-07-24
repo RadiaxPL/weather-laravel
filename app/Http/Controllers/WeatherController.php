@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\ICityRepository;
 use Illuminate\Http\Request;
-use App\Interfaces\IWeatherRepository;
-use App\Interfaces\IWeatherService;
+use App\Interfaces\ICityRepositoryRepository;
+use App\Interfaces\ICityService;
 
 class WeatherController extends Controller
 {
-    private $weatherService;
-    private $weatherRepository;
+    private $cityService;
+    private $cityRepository;
 
-    public function __construct(IWeatherService $weatherService, IWeatherRepository $weatherRepository)
+    public function __construct(ICityService $cityService, ICityRepository $cityRepository)
     {
-        $this->weatherService = $weatherService;
-        $this->weatherRepository = $weatherRepository;
+        $this->cityService = $cityService;
+        $this->cityRepository = $cityRepository;
     }
 
     public function index()
     {
-        $data = $this->weatherRepository->getAll();
+        $data = $this->cityRepository->getAll();
 
         return view('weather.index', ["cities" => $data]);
     }
@@ -37,7 +38,7 @@ class WeatherController extends Controller
             'city' => 'required|max:100',
         ]);
 
-        $response = $this->weatherService->add($city);
+        $response = $this->cityService->add($city);
 
         if ($response == false) {
             return redirect()->route('add')->with('error', 'Brak podanego miasta w bazie!');
@@ -48,21 +49,21 @@ class WeatherController extends Controller
 
     public function show($id)
     {
-        $data = $this->weatherRepository->get($id);
+        $data = $this->cityRepository->get($id);
 
         return view('weather.show', ["city" => $data]);
     }
 
     public function edit()
     {
-        $data = $this->weatherRepository->getAll();
+        $data = $this->cityRepository->getAll();
 
         return view('weather.edit', ["cities" => $data]);
     }
 
     public function destroy($id)
     {
-        $this->weatherRepository->destroy($id);
+        $this->cityRepository->destroy($id);
 
         return redirect()->route('edit');
     }

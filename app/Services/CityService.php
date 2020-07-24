@@ -3,10 +3,10 @@
 namespace App\Services;
 
 use App\Interfaces\ICityRepository;
-use App\Interfaces\IWeatherService;
+use App\Interfaces\ICityService;
 use App\Interfaces\IOpenWeatherMapClient;
 
-class WeatherService implements IWeatherService {
+class CityService implements ICityService {
     private $client;
     private $cityRepository;
 
