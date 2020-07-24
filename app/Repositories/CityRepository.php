@@ -29,6 +29,7 @@ class CityRepository implements ICityRepository {
         $city->name = $data->name;
         $city->api_city_id = $data->api_city_id;
         $city->save();
+        return $city;
     }
 
     public function destroy($id)

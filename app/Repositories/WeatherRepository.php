@@ -5,6 +5,7 @@ namespace App\Repositories;
 
 use App\Interfaces\IWeatherRepository;
 use App\Entities\Weather;
+use Mockery\Exception;
 
 class WeatherRepository implements IWeatherRepository
 {
@@ -16,5 +17,6 @@ class WeatherRepository implements IWeatherRepository
         $weather->humidity = $data->humidity;
         $weather->city_id = $data->city_id;
         $weather->save();
+        return $weather;
     }
 }

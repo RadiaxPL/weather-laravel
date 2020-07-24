@@ -3,18 +3,24 @@
 namespace App\Services;
 
 use App\DTO\CityCreateDTO;
+use App\DTO\WeatherCreateDTO;
 use App\Interfaces\ICityRepository;
 use App\Interfaces\ICityService;
 use App\Interfaces\IOpenWeatherMapClient;
+use App\Interfaces\IWeatherRepository;
+use Illuminate\Support\Facades\DB;
+use Mockery\Exception;
 
 class CityService implements ICityService {
     private $openWeatherMapClient;
     private $cityRepository;
+    private $weatherRepository;
 
-    public function __construct(IOpenWeatherMapClient $openWeatherMapClient, ICityRepository $cityRepository)
+    public function __construct(IOpenWeatherMapClient $openWeatherMapClient, ICityRepository $cityRepository, IWeatherRepository $weatherRepository)
     {
         $this->openWeatherMapClient = $openWeatherMapClient;
         $this->cityRepository = $cityRepository;
+        $this->weatherRepository = $weatherRepository;
     }
 
     public function get($id)
@@ -38,11 +44,29 @@ class CityService implements ICityService {
         if ($response == false) {
             return false;
         } else {
-            $dto = new CityCreateDTO();
-            $dto->name = $response['name'];
-            $dto->api_city_id = $response['id'];
+            try {
+                DB::beginTransaction();
 
-            $response = $this->cityRepository->add($dto);
+                $dto = new CityCreateDTO();
+                $dto->name = $response['name'];
+                $dto->api_city_id = $response['id'];
+
+                $city = $this->cityRepository->add($dto);
+
+                $dto = new WeatherCreateDTO;
+                $dto->city_id = $city->id;
+                $dto->temperature = $response['main']['temp'];
+                $dto->pressure = $response['main']['pressure'];
+                $dto->humidity = $response['main']['humidity'];
+
+                $this->weatherRepository->create($dto);
+
+                DB::commit();
+            }
+            catch (Exception $e) {
+                DB::rollback();
+                return false;
+            }
 
             return true;
         }
