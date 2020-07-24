@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Jobs\FetchDataFromApi;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -26,6 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        Log::alert('Coś się dzieje');
         $schedule->job(new FetchDataFromApi)->everyMinute();
     }
 

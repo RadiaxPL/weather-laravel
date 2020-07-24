@@ -10,28 +10,19 @@ use Illuminate\Queue\SerializesModels;
 use App\Interfaces\IOpenWeatherMapClient;
 use App\Interfaces\IWeatherRepository;
 use App\Interfaces\ICityRepository;
+use Illuminate\Support\Facades\Log;
 
 class FetchDataFromApi implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
-	private $client;
-	private $weatherRepository;
-	private $cityRepository;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(IOpenWeatherMapClient $client,
-                                IWeatherRepository $weatherRepository,
-                                ICityRepository $cityRepository
-    )
+    public function __construct()
     {
-        $this->client = $client;
-        $this->weatherRepository = $weatherRepository;
-        $this->cityRepository = $cityRepository;
     }
 
     /**
@@ -39,14 +30,18 @@ class FetchDataFromApi implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(IOpenWeatherMapClient $client,
+                           IWeatherRepository $weatherRepository,
+                           ICityRepository $cityRepository)
     {
+        Log::alert('alert 1');
         try {
-			$cities = $this->cityRepository->getAll();
+			$cities = $cityRepository->getAll();
 
 			foreach ($cities as $city) {
-                $data = $this->client->findCityById($city->city_id);
-                $this->weatherRepository->updateInformation($data);
+                $data = $client->findCityById($city->city_id);
+                $weatherRepository->updateInformation($data);
+                Log::alert('alert 2');
 			}
 		}
 		catch(Exception $e) {

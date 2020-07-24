@@ -15,10 +15,10 @@ class CreateWeatherTable extends Migration
     {
         Schema::create('weather', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->tinyInteger('temperature');
-            $table->tinyInteger('pressure');
-            $table->tinyInteger('humidity');
-            $table->tinyInteger('city_id');
+            $table->integer('temperature');
+            $table->integer('pressure');
+            $table->integer('humidity');
+            $table->integer('city_id');
             $table->timestamps();
         });
     }
