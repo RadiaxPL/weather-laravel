@@ -6,7 +6,7 @@
         <h1 class="mt-4">Monitoring temperatury miast!</h1>
 
         <p class="mt-4 font-italic">
-            Statystyki dotyczące temperatury wybranych miast, dostępne za pośrednictwem <a href="https://openweathermap.org/">OpenWeather API</a>
+            Statystyki dotyczące temperatury wybranych miast, dostępne za pośrednictwem <a href="https://openweathermap.org/">OpenWeatherMap API</a>
         </p>
 
         <div class="row d-flex justify-content-center">
@@ -28,7 +28,7 @@
                 </div>
             @empty
                 <div class="alert alert-danger">
-                    Dodaj jakieś miasto!
+                    Brak miast do wyświetlenia!
                 </div>
             @endforelse
 
