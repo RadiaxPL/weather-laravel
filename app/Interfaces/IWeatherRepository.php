@@ -12,7 +12,7 @@ interface IWeatherRepository
 
     public function getAll();
 
-    public function add($name);
+    public function add($data);
 
     public function destroy($id);
 }

@@ -32,10 +32,14 @@ class WeatherService implements IWeatherService {
 
     public function add($name)
     {
-        $data = $this->client->findCityByName($name);
-        $response = $this->weatherRepository->add($data);
+        $response = $this->client->findCityByName($name);
 
-        return $response;
+        if ($response == false) {
+            return false;
+        } else {
+            $response = $this->weatherRepository->add($response);
+            return true;
+        }
     }
 
     public function delete($id)

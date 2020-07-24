@@ -25,12 +25,10 @@ class WeatherRepository implements IWeatherRepository
 
     public function add($data)
     {
-            $city = new City();
-            $city->name = $data['name'];
-            $city->city_id = $data['id'];
-            $city->save();
-
-            return true;
+        $city = new City();
+        $city->name = $data['name'];
+        $city->city_id = $data['id'];
+        $city->save();
     }
 
     public function destroy($id)
