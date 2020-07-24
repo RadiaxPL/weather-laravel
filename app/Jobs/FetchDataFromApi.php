@@ -40,7 +40,7 @@ class FetchDataFromApi implements ShouldQueue
 			$cities = $cityRepository->getAll();
 
 			foreach ($cities as $city) {
-                $data = $client->findCityById($city->city_id);
+                $data = $client->findCityById($city->api_city_id);
                 $weatherRepository->updateInformation($data);
                 $count++;
 			}

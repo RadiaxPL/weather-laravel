@@ -15,7 +15,7 @@ class CityRepository implements ICityRepository {
 
     public function getByCityId($city_id)
     {
-        return City::where('city_id', $city_id)->limit(1)->get();
+        return City::where('api_city_id', $city_id)->limit(1)->get();
     }
 
     public function getAll()
