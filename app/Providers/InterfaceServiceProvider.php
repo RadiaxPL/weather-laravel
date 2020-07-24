@@ -29,6 +29,11 @@ class InterfaceServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            'App\Interfaces\IWeatherService',
+            'App\Services\WeatherService'
+        );
+
+        $this->app->bind(
             'App\Interfaces\IOpenWeatherMapClient',
             'App\Clients\OpenWeatherMapClient'
         );
